@@ -7,13 +7,14 @@ import time
 
 current_datetime = datetime.now()
 formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
-url = 'https://www.pbtech.co.nz/product/VGAGLX040910/GALAX-NVIDIA-GeForce-RTX-4090-ST-24GB-GDDR6X-Graph'
+url = 'https://www.pbtech.co.nz/product/MEMGSK3828/GSKILL-Ripjaws-V-Series-16GB-DDR4-Desktop-RAM-Kit'
+#url = 'https://www.pbtech.co.nz/product/VGAGLX040910/GALAX-NVIDIA-GeForce-RTX-4090-ST-24GB-GDDR6X-Graph' #this is for the 4090 gpu with units in stock
 browser = webdriver.Chrome()
 browser.get(url)
 
+###note that the price is not same for all pages e.g. if no tax free shipping or no units available then the xpath is changed and will not work
 name = browser.find_element('xpath','//*[@id="main_container"]/div[3]/div/div[2]/div[1]/div/div[1]/h1')
 price =  browser.find_element('xpath','//*[@id="main_container"]/div[3]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[2]/div/div[1]/div/span[3]/span/span[2]') 
-
 list = [name.text]
 print(list)
 
@@ -30,12 +31,19 @@ try:
   #doing for 19 because there are 19 main
   for i in range(1,20):
     available = WebDriverWait(browser,10).until(EC.presence_of_element_located((By.XPATH,'//*[@id="js-desktop-stock-table-container"]/table/tbody/tr[{}]/td[2]'.format(i))))
-    sum = sum +int(available.text)
-    l.append(int(available.text))
+    if "+" in available.text:
+      val = available.text.replace("+", "")
+      print(val)
+      sum = sum + int(val)
+      l.append(int(val))
+      print(sum)
+    else:
+      sum = sum + int(available.text)
+      l.append(int(available.text))
   print(l)
   print(sum)
-except:
-  print('error')
+except Exception as e:
+  print('error' ,str(e))
   browser.quit()
 
 

@@ -22,15 +22,18 @@ print(list)
 #available_modal = browser.find_element(By.LINK_TEXT, "Check store stock levels").click()
 #time.sleep(10)
 try:
-  l = []
+  l = [] #dont need to do list and sum u can just use sum only i added list to help me visualise while testing
+  sum = 0
   available_modal = WebDriverWait(browser,10).until(EC.presence_of_element_located((By.LINK_TEXT,'Check store stock levels'))).click()
   #available = WebDriverWait(browser,10).until(EC.presence_of_element_located((By.XPATH,'//*[@id="js-desktop-stock-table-container"]/table/tbody/tr[19]/td[2]')))
 
-  #doing for 19 because there are 19 main stores
+  #doing for 19 because there are 19 main
   for i in range(1,20):
     available = WebDriverWait(browser,10).until(EC.presence_of_element_located((By.XPATH,'//*[@id="js-desktop-stock-table-container"]/table/tbody/tr[{}]/td[2]'.format(i))))
-    l.append(available.text)
+    sum = sum +int(available.text)
+    l.append(int(available.text))
   print(l)
+  print(sum)
 except:
   print('error')
   browser.quit()
@@ -38,7 +41,7 @@ except:
 
 file = open("GpuData.txt", "w")
 file.write(list[0])
-file.write(' Price: $'+ price.text + ' Time: '+ formatted_datetime +' Total number available at pb tech ' +l[0])
+file.write(' Price: $'+ price.text + ' Time: '+ formatted_datetime +' Total number available at pb tech ' + str(sum))
 file.close()
 
 #test commit

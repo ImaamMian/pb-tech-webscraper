@@ -21,3 +21,4 @@ file.close()
 
 #test commit
 browser.quit()
+browser.quit()

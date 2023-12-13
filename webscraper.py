@@ -19,5 +19,5 @@ file.write(list[0])
 file.write(' Price: $'+price.text + ' Time: '+formatted_datetime)
 file.close()
 
-
+#test commit
 browser.quit()

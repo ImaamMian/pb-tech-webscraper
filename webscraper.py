@@ -18,7 +18,7 @@ price =  browser.find_element('xpath','//*[@id="main_container"]/div[3]/div/div[
 list = [name.text]
 print(list)
 
-
+#IMPORTANT: TRY TO CHANGE THE PRICE TO USE THE CLASS BECAUSE IT SEEMS ITS ONLY USED FOR THE PRICE AND NOTHING ELSE BECAUSE THE XPATH KEEPS CHANGING DEPENDING ON DIFF FACTORS SUCH AS HAVING NO UNITS AVAILABLE OR TAX FREE SHIPPING AVAILABLE
 
 #available_modal = browser.find_element(By.LINK_TEXT, "Check store stock levels").click()
 #time.sleep(10)

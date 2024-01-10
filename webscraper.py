@@ -14,7 +14,9 @@ browser.get(url)
 
 ###note that the price is not same for all pages e.g. if no tax free shipping or no units available then the xpath is changed and will not work
 name = browser.find_element('xpath','//*[@id="main_container"]/div[3]/div/div[2]/div[1]/div/div[1]/h1')
-price =  browser.find_element('xpath','//*[@id="main_container"]/div[3]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[2]/div/div[1]/div/span[3]/span/span[2]') 
+#price =  browser.find_element('xpath','//*[@id="main_container"]/div[3]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[2]/div/div[1]/div/span[3]/span/span[2]') 
+price =  browser.find_element(By.CLASS_NAME,'js-dollar') 
+price_cents = browser.find_element(By.CLASS_NAME,'js-cent') 
 list = [name.text]
 print(list)
 
@@ -49,7 +51,7 @@ except Exception as e:
 
 file = open("GpuData.txt", "w")
 file.write(list[0])
-file.write(' Price: $'+ price.text + ' Time: '+ formatted_datetime +' Total number available at pb tech ' + str(sum))
+file.write(' Price: $'+ price.text + price_cents.text + ' Time: '+ formatted_datetime +' Total number available at pb tech ' + str(sum))
 file.close()
 
 #test commit
